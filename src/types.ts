@@ -4,5 +4,5 @@ export interface Habit {
   description: string;
   frequency: string;
   isCompleted: boolean;
-  
+  createdAt: Date;
 }

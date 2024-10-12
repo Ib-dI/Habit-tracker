@@ -26,6 +26,7 @@ export default function HabitList({ habits, onCompleteHabit, onDeleteHabit }: Ha
               description={habit.description}
               frequency={habit.frequency as "daily" | "weekly"}
               isCompleted={habit.isCompleted}
+              createdAt={habit.createdAt}
               onCompleteHabit={() => onCompleteHabit(habit.id)}
               onDeleteHabit={() => onDeleteHabit(habit.id)}
             />

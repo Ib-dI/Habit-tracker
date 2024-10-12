@@ -24,7 +24,8 @@ export default function HabitStats( { habits }: HabitsStatsProps) {
     ]
   }
   return (
-    <div className="my-4 w-96 mx-auto">
+    <div className="my-4 w-48 h-56
+    ">
       <h2 className="text-xl font-semibold text-gray-700 mb-2">Statistiques</h2>
       <Pie data={data}/>
     </div>

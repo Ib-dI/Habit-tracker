@@ -1,10 +1,12 @@
 import { motion } from "framer-motion";
+import { CheckCircleIcon, TrashIcon } from "@heroicons/react/24/solid";
 
 interface HabitItemProps {
   name: string;
   description: string;
   frequency: "daily" | "weekly";
   isCompleted: boolean;
+  createdAt: Date; // Ajout de la date ici
   onCompleteHabit: () => void;
   onDeleteHabit: () => void;
 }
@@ -14,9 +16,19 @@ export default function HabitItem({
   description,
   frequency,
   isCompleted,
+  createdAt, // Ajout de la date ici
   onCompleteHabit,
   onDeleteHabit,
 }: HabitItemProps) {
+  // Formatage de la date
+  const formattedDate = new Date(createdAt).toLocaleDateString("fr-FR", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+  
+  
+
   return (
     <motion.li
       initial={{ opacity: 0, y: 20 }}
@@ -34,29 +46,40 @@ export default function HabitItem({
           <span className="text-xs text-gray-500">
             Fréquence: {frequency === "daily" ? "Quotidienne" : "Hebdomadaire"}
           </span>
+          {/* Affichage de la date */}
+          <p className="text-xs text-gray-400 mt-2">Créée le : {formattedDate}</p>
         </div>
 
-        <motion.div className="flex space-x-4 items-center">
-          <motion.button
+        <motion.div className="flex flex-col space-y-3.5 md:flex-row md:space-y-0 md:space-x-4 items-center">
+          <motion.div
+            className="relative group"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            transition={{ duration: 0 }}
-            className={`px-3 py-1 rounded-lg text-white transition ${
-              isCompleted ? "bg-green-500" : "bg-blue-500 hover:bg-blue-600"
-            }`}
-            onClick={onCompleteHabit}
           >
-            {isCompleted ? "Complétée" : "Compléter"}
-          </motion.button>
-          <motion.button
+            <CheckCircleIcon
+              className={`h-6 w-6 cursor-pointer transition ${
+                isCompleted ? "text-green-500" : "text-blue-500"
+              }`}
+              onClick={onCompleteHabit}
+            />
+            <span className={`absolute left-1/2 transform -translate-x-1/2 bottom-8 ${isCompleted ? "bg-green-500" : "bg-blue-500"} text-white text-xs rounded-md px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity`}>
+              {isCompleted ? "Complétée" : "Compléter"}
+            </span>
+          </motion.div>
+
+          <motion.div
+            className="relative group"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            transition={{ duration: 0 }}
-            className="px-3 py-1 rounded-lg bg-red-500 text-white hover:bg-red-600 transition"
-            onClick={onDeleteHabit}
           >
-            Supprimer
-          </motion.button>
+            <TrashIcon
+              className="h-6 w-6 text-red-500 cursor-pointer"
+              onClick={onDeleteHabit}
+            />
+            <span className="absolute left-1/2 transform -translate-x-1/2 bottom-8 bg-red-500 text-white text-xs rounded-md px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">
+              Supprimer
+            </span>
+          </motion.div>
         </motion.div>
       </div>
     </motion.li>

@@ -65,9 +65,11 @@ export default function HabitTracker() {
   return (
     <div className="container mx-auto p-4 space-y-4">
       <h1 className="text-3xl font-bold text-center text-gray-700 mb-6">Habit Tracker</h1>
+      <div className="flex flex-col items-center justify-center md:flex-row gap-2.5">
       <HabitForm onAddHabit={addHabit} />
-      <HabitList habits={habits} onCompleteHabit={completeHabit} onDeleteHabit={deleteHabit} />
       <HabitStats habits={habits} />
+      </div>
+      <HabitList habits={habits} onCompleteHabit={completeHabit} onDeleteHabit={deleteHabit} />
     </div>
   );
 }

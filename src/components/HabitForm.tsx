@@ -19,20 +19,23 @@ export default function HabitForm({ onAddHabit }: HabitFormProps) {
         description,
         frequency,
         isCompleted: false,
-      }
-      onAddHabit(newHabit)
-      setTitle('')
-      setDescription('')
-      setFrequency('daily')
+        // Création d'un objet Date valide
+        createdAt: new Date(),
+      };
+      onAddHabit(newHabit);
+      setTitle("");
+      setDescription("");
+      setFrequency("daily");
     } else {
       alert("Veuillez remplir tous les champs.");
     }
   };
+  
 
   return (
-    <form 
-      onSubmit={handleSubmit} 
-      className="bg-gradient-to-br from-gray-100 to-blue-100 p-6 rounded-[30px] shadow-md w-full max-w-md mx-auto transition-all duration-300 ease-in-out transform hover:scale-105"
+    <form
+      onSubmit={handleSubmit}
+      className="bg-gradient-to-br from-gray-100 to-blue-100 p-6 rounded-[30px] shadow-md w-full max-w-md transition-all duration-300 ease-in-out transform"
     >
       <h2 className="text-3xl font-semibold mb-6 text-center text-gray-700">Ajouter une Habitude</h2>
       <div className="mb-4">
@@ -65,7 +68,7 @@ export default function HabitForm({ onAddHabit }: HabitFormProps) {
       </div>
       <button
         type="submit"
-        className="w-full bg-amber-500 text-white py-3 rounded-lg hover:bg-yellow-600 transition-all transform hover:scale-105"
+        className="w-full bg-amber-500 text-white py-3 rounded-lg hover:bg-blue-500 transition-all transform hover:scale-105"
       >
         Ajouter l'Habitude
       </button>
